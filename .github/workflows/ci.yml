@@ -28,5 +28,6 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run tests
-        run: echo "Exécution des tests..."
-        run: npm test
+        run: |
+          echo "Exécution des tests..."
+          npm test
