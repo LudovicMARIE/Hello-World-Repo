@@ -1,8 +1,7 @@
 on: [push, pull_request]
-
 jobs:
   build_job:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -16,7 +15,7 @@ jobs:
         run: echo "Compilation de l'application..."
 
   test_job:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: build_job
     steps:
       - name: Checkout code
