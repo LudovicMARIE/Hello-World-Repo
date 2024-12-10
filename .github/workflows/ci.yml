@@ -1,15 +1,32 @@
-name: CI/CD Workflow
-
-on:
-  push:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
-  hello_job:
+  build_job:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Run Hello World
-        run: echo Hello, world!
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        run: npm install
+      - name: Build application
+        run: echo "Compilation de l'application..."
+
+  test_job:
+    runs-on: ubuntu-latest
+    needs: build_job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: echo "Exécution des tests..."
+        run: npm test
